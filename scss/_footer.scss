@@ -1,0 +1,136 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+.footer {
+  background-color: v.$darkBlue;
+  color: v.$white;
+  padding: 2.5rem;
+  text-align: center;
+
+  .container {
+    @include m.breakpoint-up(large) {
+      display: grid;
+      grid-template-columns: 1.5fr .8fr .8fr 2fr;
+      grid-template-rows: 1fr auto;
+      grid-template-areas:
+        "logo link1 link2 cta"
+        "social link1 link2 copyright";
+      gap: 1rem;
+      justify-items: start;
+    }
+  }
+
+  a {
+    color: v.$white;
+  }
+
+  &__logo {
+    display: inline-block;
+
+    @include m.breakpoint-down(medium) {
+      margin-bottom: 1.875rem;
+    }
+
+    @include m.breakpoint-up(large) {
+      grid-area: logo;
+    }
+  }
+
+  &__social {
+
+    @include m.breakpoint-down(medium) {
+      margin-bottom: 1.875rem;
+    }
+
+    @include m.breakpoint-up(large) {
+      grid-area: social;
+      align-self: end;
+    }
+
+    a {
+      display: inline-block;
+      height: 1.25rem;
+
+      svg path {
+        transition: fill .15s ease-in-out;
+      }
+
+      &:hover svg path {
+        fill: v.$limeGreen;
+      }
+    }
+
+    a:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: .9375rem;
+
+    @include m.breakpoint-up(large) {
+      align-items: start;
+      justify-content: space-between;
+    }
+
+    &.col1 {
+
+      @include m.breakpoint-up(large) {
+        grid-area: link1;
+      }
+    }
+
+    &.col2 {
+
+      @include m.breakpoint-down(medium) {
+        margin-bottom: 1.875rem;
+      }
+
+      @include m.breakpoint-up(large) {
+        grid-area: link2;
+      }
+    }
+
+
+    a {
+      line-height: 2.25;
+      transition: fill .15s ease-in-out;
+
+      &:hover {
+        color: v.$limeGreen;
+      }
+    }
+  }
+
+  &__cta {
+
+    @include m.breakpoint-up(large) {
+      grid-area: cta;
+      justify-self: end;
+      text-align: right;
+      align-items: legacy bottom;
+    }
+
+    a.button {
+
+      @include m.breakpoint-down(medium) {
+        margin-bottom: 1.875rem;
+      }
+    }
+  }
+
+  &__copyright {
+
+    font-size: .8125rem;
+    color: v.$grayishBlue;
+
+    @include m.breakpoint-up(large) {
+      grid-area: copyright;
+      align-self: end;
+      justify-self: end;
+    }
+  }
+}
